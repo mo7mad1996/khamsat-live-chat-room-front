@@ -1,0 +1,36 @@
+.container {
+  width: 80%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: var(--chat-color);
+  font-size: 1em;
+  outline: none;
+  border-radius: 5px;
+  padding: 0.5em 1.2em;
+
+  span {
+    display: inline-flex;
+    gap: 1em;
+    align-items: center;
+  }
+}
+button:focus,
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+a {
+  color: var(--link-color);
+}

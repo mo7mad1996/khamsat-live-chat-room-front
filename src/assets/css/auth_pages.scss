@@ -1,0 +1,20 @@
+.page-title {
+  text-align: center;
+  padding-top: 200px;
+}
+
+form {
+  margin: 2em;
+  background-color: rgba(203, 200, 200, 0.6);
+  padding: 2em;
+
+  button {
+    margin-block: 1em;
+    display: block;
+    width: 100%;
+  }
+
+  .input {
+    margin-block: 2em;
+  }
+}
