@@ -8,6 +8,8 @@ import vueDevTools from "vite-plugin-vue-devtools";
 export default defineConfig({
   build: {
     sourcemap: false, // Disable source maps in production
+    host: true,
+    port: 2200,
   },
   server: {
     sourcemap: false, // Disable source maps in development
