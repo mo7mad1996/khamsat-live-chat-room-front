@@ -54,18 +54,15 @@ const setupPeerEvents = () => {
         const audio = new Audio();
         audio.srcObject = stream;
         onLive[call.peer] = audio;
-        if (call.peer === props.to) {
-          audio.play();
-        }
       });
 
-      call.on("close", () => {
-        closeTheCall(call.peer);
-      });
+      call.on("close", () => 
+        closeTheCall(call.peer)
+      );
 
-      call.on("error", (err) => {
-        closeTheCall(call.peer);
-      });
+      call.on("error", () => 
+        closeTheCall(call.peer)
+      );
     });
 
     peerStore.peer.on("connection", function (conn) {
@@ -96,6 +93,12 @@ const pauseAudio = (peerId) => {
   }
 };
 
+const isPeerInGroup = (peerId) => {
+  if(onLiveGroups.value.length)  
+    return onLiveGroups.value.some((o) => o.peer == peerId);
+  return true
+};
+
 // watch data
 watch(() => props.to, scrollToBottom);
 watch(() => props.messages, scrollToBottom);
@@ -124,7 +127,10 @@ socket.on("stop-live", (peerId) => {
 
 <template>
   <div class="massages_container">
-    <div class="live" v-if="isGroup">
+
+    <!-- live -->
+   
+     <div class="live" v-if="isGroup">
       <div
         v-for="(audio, n) in onLiveGroups
           .filter((e) => to == e.group)
@@ -144,12 +150,13 @@ socket.on("stop-live", (peerId) => {
         </div>
       </div>
     </div>
+     
     <div class="live" v-else>
       <div v-for="(audio, n) in onLive" :key="n">
         <div
           class="controller"
           v-if="
-            peerStore.peers[to] == n && onLiveGroups.some((o) => o.peer !== n)
+            peerStore.peers[to] == n && isPeerInGroup(n)
           "
         >
           <font-awesome-icon :icon="['fas', 'volume-high']" />
@@ -163,7 +170,10 @@ socket.on("stop-live", (peerId) => {
           />
         </div>
       </div>
-    </div>
+    </div> 
+    
+
+    <!-- messages -->
     <ul>
       <li
         v-for="(msg, n) in messages"

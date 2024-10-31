@@ -36,8 +36,9 @@ export const useAuthStore = defineStore("authStore", {
 
         // save cookie
         cookie.set("token", res.data.token, {
-          sameSite: "None",
-          secure: true,
+          // sameSite: "None",
+          // secure: true,
+          // expires: new Date() + 1000 * 60 * 60 * 24 * 30,
         });
 
         // run callback
